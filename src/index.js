@@ -1,17 +1,44 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Login from "./Login";
+import UserProfile from "./UserProfile";
+import { Provider, useSelector } from "react-redux";
+import store from "./Redux/Store";
+import { Redirect } from "react-router-dom";
+// const RouterComponent = () => {
+//   // const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+//   if (true) {
+//     return (
+//       <Switch>
+//         <Route path="/" element={<App />} />
+//         {/* <Route path="/login" element={<Login />} /> */}
+//         <Route path="/profile" element={<UserProfile />} />
+//       </Switch>
+//     );
+//   } else {
+//     return <Redirect to="/login" />;
+//   }
+// };
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <Provider store={store}>
+    <Router>
+      {/* <Routes>
+        <Route path="/" exact element={<App />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<UserProfile />} />
+      </Routes> */}
+      <Switch>
+        <Route path="/" exact component={App} />
+        <Route path="/login" component={Login} />
+        <Route path="/profile" component={UserProfile} />
+      </Switch>
+      {/* {RouterComponent()} */}
+    </Router>
+  </Provider>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
